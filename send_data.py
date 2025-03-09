@@ -1,4 +1,6 @@
 import serial
+import random
+import time
 
 # Configure the serial port
 com_port = 'COM1'  # Replace with your COM port
@@ -11,12 +13,18 @@ try:
     print(f"Connected to {com_port} at {baud_rate} baud.")
 
     # Data to send
-    data_to_send = "Hello, COM port!\n"  # \r\n for a new line (if needed)
+    
 
     # Send data
     while True:
+        x = random.uniform(0.0, 360.0)
+        y = random.uniform(0.0, 360.0)
+        z = random.uniform(0.0, 360.0)
+        
+        data_to_send = f"X:{x}, Y:{y}, Z:{z}\n"  # \r\n for a new line (if needed)
         ser.write(data_to_send.encode())  # Encode string to bytes
         print(f"Sent: {data_to_send}")
+        time.sleep(1)
 
     # Close the serial port
     ser.close()
